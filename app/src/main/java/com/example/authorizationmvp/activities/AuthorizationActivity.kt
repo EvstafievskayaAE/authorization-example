@@ -8,8 +8,11 @@ import com.example.authorizationmvp.presenter.LoginPresenterClass
 import com.example.authorizationmvp.presenter.LoginPresenterInterface
 import com.example.authorizationmvp.view.LoginViewInterface
 import kotlinx.android.synthetic.main.activity_authorization.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 
-class AuthorizationActivity: AppCompatActivity(), LoginViewInterface {
+class AuthorizationActivity: MvpAppCompatActivity(), LoginViewInterface {
+    @InjectPresenter
     internal lateinit var loginPresenter: LoginPresenterInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {

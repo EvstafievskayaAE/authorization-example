@@ -2,8 +2,12 @@ package com.example.authorizationmvp.presenter
 
 import com.example.authorizationmvp.model.UserClass
 import com.example.authorizationmvp.view.LoginViewInterface
+import moxy.InjectViewState
+import moxy.MvpPresenter
 
-class LoginPresenterClass (internal var loginViewInterface:LoginViewInterface):LoginPresenterInterface {
+@InjectViewState
+class LoginPresenterClass (internal var loginViewInterface:LoginViewInterface):LoginPresenterInterface,
+    MvpPresenter<LoginViewInterface>() {
     override fun onLogin(email: String, password: String) {
         val user = UserClass(email, password)
         val loginCode = user.isDataValid()

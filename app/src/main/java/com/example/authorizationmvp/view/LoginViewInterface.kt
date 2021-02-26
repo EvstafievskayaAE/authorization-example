@@ -1,6 +1,8 @@
 package com.example.authorizationmvp.view
 
-interface LoginViewInterface {
+import moxy.MvpView
+
+interface LoginViewInterface: MvpView{
     fun onLoginSuccess(message: String)
     fun onLoginError(message: String)
 }
