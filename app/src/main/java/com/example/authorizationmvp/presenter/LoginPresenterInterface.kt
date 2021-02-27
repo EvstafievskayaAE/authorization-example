@@ -1,5 +1,9 @@
 package com.example.authorizationmvp.presenter
 
-interface LoginPresenterInterface{
+import moxy.MvpView
+import moxy.viewstate.strategy.alias.AddToEndSingle
+
+interface LoginPresenterInterface: MvpView {
+    @AddToEndSingle
     fun onLogin(email:String, password: String)
 }

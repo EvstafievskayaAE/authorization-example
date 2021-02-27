@@ -6,17 +6,17 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 
 @InjectViewState
-class LoginPresenterClass (internal var loginViewInterface:LoginViewInterface):LoginPresenterInterface,
+class LoginPresenterClass:LoginPresenterInterface,
     MvpPresenter<LoginViewInterface>() {
     override fun onLogin(email: String, password: String) {
         val user = UserClass(email, password)
         val loginCode = user.isDataValid()
         if(loginCode == 0)
-            loginViewInterface.onLoginError("Enter email, please")
+            viewState.onLoginError("Enter email, please")
         else if(loginCode == 1)
-            loginViewInterface.onLoginError("Wrong email address")
+            viewState.onLoginError("Wrong email address")
         else if(loginCode == 2)
-            loginViewInterface.onLoginError("Password must be no less 6 characters")
-        else loginViewInterface.onLoginSuccess("Login Success")
+            viewState.onLoginError("Password must be no less 6 characters")
+        else viewState.onLoginSuccess("Login Success")
     }
 }

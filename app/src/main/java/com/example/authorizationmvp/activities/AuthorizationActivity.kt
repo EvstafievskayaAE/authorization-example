@@ -12,14 +12,14 @@ import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 
 class AuthorizationActivity: MvpAppCompatActivity(), LoginViewInterface {
-    @InjectPresenter
+
     internal lateinit var loginPresenter: LoginPresenterInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authorization)
 
-        loginPresenter = LoginPresenterClass(this)
+        loginPresenter = LoginPresenterClass()
         loginButton.setOnClickListener {
             loginPresenter.onLogin(loginEditText.text.toString(), passwordEditText.text.toString())
         }
