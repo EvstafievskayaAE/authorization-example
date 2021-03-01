@@ -13,7 +13,8 @@ import moxy.presenter.InjectPresenter
 
 class AuthorizationActivity: MvpAppCompatActivity(), LoginViewInterface {
 
-    internal lateinit var loginPresenter: LoginPresenterInterface
+    @InjectPresenter
+    internal lateinit var loginPresenter: LoginPresenterClass
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
