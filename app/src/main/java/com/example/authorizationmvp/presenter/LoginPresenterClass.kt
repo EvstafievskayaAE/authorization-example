@@ -1,19 +1,26 @@
 package com.example.authorizationmvp.presenter
 
+import com.example.authorizationmvp.constants.LoginCodes
+import com.example.authorizationmvp.constants.LoginMessages
 import com.example.authorizationmvp.model.UserClass
 import com.example.authorizationmvp.view.LoginViewInterface
 
-class LoginPresenterClass (internal var loginViewInterface:LoginViewInterface):LoginPresenterInterface {
+class LoginPresenterClass(
+        internal var loginViewInterface: LoginViewInterface) : LoginPresenterInterface {
+
     override fun onLogin(email: String, password: String) {
+
         val user = UserClass(email, password)
         val loginCode = user.isDataValid()
 
-        if(loginCode == 0)
-            loginViewInterface.onLoginError("Enter email, please")
-        else if(loginCode == 1)
-            loginViewInterface.onLoginError("Wrong email address")
-        else if(loginCode == 2)
-            loginViewInterface.onLoginError("Password must have more 6 characters")
-        else loginViewInterface.onLoginSuccess("Login Success")
+        if (loginCode == LoginCodes.EMPTY_LOGIN_FIELDS_ERROR_CODE)
+            loginViewInterface.onLoginError(LoginMessages.EMPTY_LOGIN_FIELDS_ERROR_MESSAGE)
+        else if (loginCode == LoginCodes.INVALID_EMAIL_FORMAT_ERROR_CODE)
+            loginViewInterface.onLoginError(LoginMessages.INVALID_EMAIL_FORMAT_ERROR_MESSAGE)
+        else if (loginCode == LoginCodes.INVALID_PASSWORD_ERROR_CODE)
+            loginViewInterface.onLoginError(LoginMessages.INVALID_PASSWORD_ERROR_MESSAGE)
+        else loginViewInterface.onLoginSuccess(LoginMessages.LOGIN_SUCCESS_MESSAGE)
+
     }
+
 }
