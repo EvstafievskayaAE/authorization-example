@@ -10,6 +10,7 @@ import com.example.authorizationmvp.view.LoginViewInterface
 import kotlinx.android.synthetic.main.activity_authorization.*
 
 class AuthorizationActivity: AppCompatActivity(), LoginViewInterface {
+
     internal lateinit var loginPresenter: LoginPresenterInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
