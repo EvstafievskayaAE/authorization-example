@@ -25,11 +25,15 @@ class AuthorizationActivity: MvpAppCompatActivity(), LoginViewInterface {
 
     override fun onLoginSuccess(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this@AuthorizationActivity, MainActivity::class.java))
-        finish()
+        startMainActivity()
     }
 
     override fun onLoginError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun startMainActivity(){
+        startActivity(Intent(this@AuthorizationActivity, MainActivity::class.java))
+        finish()
     }
 }

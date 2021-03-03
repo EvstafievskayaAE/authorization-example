@@ -1,22 +1,24 @@
 package com.example.authorizationmvp.presenter
 
+import com.example.authorizationmvp.constants.LoginCodes
+import com.example.authorizationmvp.constants.LoginMessages
 import com.example.authorizationmvp.model.UserClass
 import com.example.authorizationmvp.view.LoginViewInterface
-import moxy.InjectViewState
 import moxy.MvpPresenter
 
 
-class LoginPresenterClass:LoginPresenterInterface,
-    MvpPresenter<LoginViewInterface>() {
+class LoginPresenterClass : LoginPresenterInterface, MvpPresenter<LoginViewInterface>() {
     override fun onLogin(email: String, password: String) {
+
         val user = UserClass(email, password)
         val loginCode = user.isDataValid()
-        if(loginCode == 0)
-            viewState.onLoginError("Enter email, please")
-        else if(loginCode == 1)
-            viewState.onLoginError("Wrong email address")
-        else if(loginCode == 2)
-            viewState.onLoginError("Password must have more 6 characters")
-        else viewState.onLoginSuccess("Login Success")
+
+        if (loginCode == LoginCodes.EMPTY_LOGIN_FIELDS_ERROR_CODE)
+            viewState.onLoginError(LoginMessages.EMPTY_LOGIN_FIELDS_ERROR_MESSAGE)
+        else if (loginCode == LoginCodes.INVALID_EMAIL_FORMAT_ERROR_CODE)
+            viewState.onLoginError(LoginMessages.INVALID_EMAIL_FORMAT_ERROR_MESSAGE)
+        else if (loginCode == LoginCodes.INVALID_PASSWORD_ERROR_CODE)
+            viewState.onLoginError(LoginMessages.INVALID_PASSWORD_ERROR_MESSAGE)
+        else viewState.onLoginSuccess(LoginMessages.LOGIN_SUCCESS_MESSAGE)
     }
 }
